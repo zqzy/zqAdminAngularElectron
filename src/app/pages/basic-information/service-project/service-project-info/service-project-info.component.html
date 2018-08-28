@@ -1,0 +1,41 @@
+<div class="searchBox code-box">
+
+    <label for="">
+        <span>服务类别：</span>
+        <nz-select style="width: 180px;" nzPlaceHolder="请选择" [(ngModel)]="singleValue" [nzSize]="size" nzShowSearch>
+            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+    </label>
+    <label for="">
+        <span>小类别：</span>
+        <nz-select style="width: 180px;" nzPlaceHolder="请选择" [(ngModel)]="singleValue" [nzSize]="size" nzShowSearch>
+            <nz-option *ngFor="let option of listOfOption" [nzLabel]="option.label" [nzValue]="option.value"></nz-option>
+        </nz-select>
+    </label>
+    <label for="">
+        <span>服务名称：</span>
+        <input nz-input placeholder="服务名称" [nzSize]="inputSize">
+    </label>
+    <label for="">
+        <span>创建门店：</span>
+        <input nz-input placeholder="门店名称" [nzSize]="inputSize">
+    </label>
+    <label for="" style="width: 480px">
+        <span>创建时间：</span>
+        <nz-range-picker [nzFormat]="dateFormat"></nz-range-picker>
+    </label>
+    <label for="">
+        <button [nzSize]="inputSize" nzType="primary" nzGhost nz-button>查询</button>
+        <button [nzSize]="inputSize" nzType="danger" nzGhost nz-button>重置</button>
+    </label>
+</div>
+<div class="code-box fs">
+    <button [nzSize]="inputSize" nzType="primary" (click)="addUpdataStore()" nzGhost nz-button>新增服务项</button>
+    <!-- <button [nzSize]="inputSize" nzType="primary" nzGhost nz-button>批量启用</button>
+    <button [nzSize]="inputSize" nzType="primary" nzGhost nz-button>批量禁用</button>
+    <button [nzSize]="inputSize" nzType="primary" nzGhost nz-button>导入</button> -->
+    <button [nzSize]="inputSize" nzType="primary" nzGhost nz-button>数据导出</button>
+</div>
+<div class="code-box">
+    <self-table [tableThName]="tableName"></self-table>
+</div>

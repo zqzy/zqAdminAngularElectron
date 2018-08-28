@@ -1,0 +1,13 @@
+.vis-toolbar{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+}
+.ant-layout-content{
+    position: relative;
+}
+.result-info{
+    position: absolute;
+    bottom: 20px;
+    color: rgba(0,0,0,0.5);
+}

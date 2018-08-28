@@ -1,0 +1,71 @@
+
+.selfLayout {
+    width: 100vw;
+    height: calc(100vh - 64px);
+    overflow-x: hidden;
+    margin-top: 64px;
+}
+
+.trigger {
+    font-size: 18px;
+    line-height: 64px;
+    padding: 0 24px;
+    cursor: pointer;
+    transition: color .3s;
+}
+
+.trigger:hover {
+    color: #1890ff;
+}
+
+.ant-layout-header {
+    position: fixed;
+    width: 100%;
+    z-index: 19;
+    top: 0;
+    left: 0;
+    color: #fff;
+    line-height: 64px;
+    .logo {
+        height: 100%;
+        margin-left: -26px;
+        >img {
+            width: 300px;
+            vertical-align:text-bottom
+        }
+    }
+}
+
+.self-layout {
+    height: 100vh;
+}
+
+.ant-layout-sider {
+    transition: width .2s cubic-bezier(.25, 0, .15, 1), translate .2s cubic-bezier(.25, 0, .15, 1);
+    z-index: 14;
+    overflow: hidden;
+    backface-visibility: hidden;
+    overflow-y: scroll;
+    background-color: #fff;
+    * {
+        outline: none;
+    }
+}
+
+.ant-layout-sider::-webkit-scrollbar {
+    display: none;
+}
+
+.self-content {
+    background: #f2f2f2;
+    padding: 24px;
+    display: flex !important;
+    flex: 1;
+    flex-direction: column;
+    height: calc(100vh - 64px);
+    .self-main-content {
+        overflow-y: scroll;
+        height: 100%;
+        flex: 1;
+    }
+}

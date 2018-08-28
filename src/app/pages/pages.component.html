@@ -1,0 +1,79 @@
+<nz-layout class="layout">
+    <nz-header style="display: flex;justify-content:space-between">
+        <div class="logo">
+            <img src="../../assets/img/logo.png" alt="">
+            <i class="anticon trigger" [class.anticon-menu-fold]="!isCollapsed" [class.anticon-menu-unfold]="isCollapsed" (click)="isCollapsed=!isCollapsed"></i>
+
+        </div>
+        <nz-dropdown>
+            <a nz-dropdown style="color: #fff">
+                欢迎 登录
+                <i class="anticon anticon-down"></i>
+            </a>
+            <ul nz-menu>
+                <!-- <li nz-menu-item (click)="log('1st menu item')">切换门店</li> -->
+                <li nz-menu-item (click)="resetPassword()">修改密码</li>
+                <li nz-menu-item (click)="loginOut()">退出登录</li>
+            </ul>
+        </nz-dropdown>
+    </nz-header>
+    <nz-layout class="selfLayout">
+        <nz-sider [nzWidth]="width" nzCollapsible [(nzCollapsed)]="isCollapsed" [nzTrigger]="triggerTemplate">
+            <ul nz-menu [nzTheme]="'light'" [nzMode]="'inline'" [nzInlineCollapsed]="isCollapsed">
+                <ng-template *ngFor="let menus of menuRouters" [ngIf]="true">
+                    <ng-template [ngIf]="menus.isChild==false">
+                        <li nz-menu-item [routerLink]="menus.path" [(nzSelected)]="menus.isSelectd" (click)="activeMenuItem(menus)">
+                            <span title>
+                                <i class="anticon anticon-file"></i>
+                                <span class="nav-text">{{menus.menuName}}</span>
+                            </span>
+                        </li>
+                    </ng-template>
+                    <ng-template [ngIf]="menus.isChild==true">
+                        <li nz-submenu [(nzOpen)]="menus.isOpen" (nzOpenChange)="activeMenuOpen(menus)">
+                            <span title>
+                                <i class="anticon anticon-appstore"></i>
+                                <span class="nav-text">{{menus.menuName}}</span>
+                            </span>
+                            <ul>
+                                <ng-template *ngFor="let menu of menus.children" [ngIf]="true">
+                                        <app-self-menu-child [menuChild]="menu" (clickEmit)="activeMenuItem($event)" (clickOpen)="activeMenuOpen($event)"></app-self-menu-child>
+
+                                    <!-- <ng-template [ngIf]="menu.isChild==false">
+                                        <li nz-menu-item routerLinkActive="active" [routerLink]="menu.path" [nzSelected]="selectPath==menu.path" (click)="getMenusInfo(menus,menu)">{{menu.menuName}}</li>
+                                    </ng-template>
+                                    <ng-template [ngIf]="menu.isChild==true">
+                                        <li nz-submenu [(nzOpen)]="menu.isOpen" (nzOpenChange)="openHandler(menu)">
+                                            <span title>{{menu.menuName}}</span>
+                                            <ul>
+                                                <li nz-menu-item *ngFor="let menuc of menu.children" routerLinkActive="active" [routerLink]="menuc.path" [nzSelected]="selectPath==menuc.path"
+                                                    (click)="getMenusInfo(menus,menu)">{{menuc.menuName}}</li>
+                                            </ul>
+                                        </li>
+                                    </ng-template> -->
+                                </ng-template>
+                            </ul>
+                        </li>
+                    </ng-template>
+                </ng-template>
+            </ul>
+        </nz-sider>
+        <nz-layout>
+            <nz-content class="self-content">
+                <div class="code-box">
+                    <nz-breadcrumb>
+                        <nz-breadcrumb-item *ngFor="let Breadcrumb of Breadcrumbs">
+                            <a [routerLink]="">{{Breadcrumb.label}}</a>
+                        </nz-breadcrumb-item>
+                    </nz-breadcrumb>
+                </div>
+                <div class="self-main-content">
+                    <router-outlet></router-outlet>
+                </div>
+            </nz-content>
+        </nz-layout>
+    </nz-layout>
+</nz-layout>
+<ng-template #trigger>
+    <i class="anticon anticon-up"></i>
+</ng-template>

@@ -1,0 +1,20 @@
+<ng-container *ngIf="menuChild.children">
+  <li nz-submenu [(nzOpen)]="menuChild.isOpen" (nzOpenChange)="clickOpen.emit(menuChild)">
+    <span title>
+      {{menuChild.menuName}}
+    </span>
+    <ul>
+      <ng-container *ngFor="let subChild of menuChild.children">
+        <app-self-menu-child [menuChild]="subChild" (clickEmit)="clickEmit.emit($event)">
+        </app-self-menu-child>
+      </ng-container>
+    </ul>
+  </li>
+</ng-container>
+<ng-container *ngIf="!menuChild.children">
+  <li nz-menu-item [nzSelected]="menuChild.isSelectd" routerLinkActive="active" [routerLink]="menuChild.path" (click)="clickEmit.emit(menuChild)">
+    <span title>
+    {{menuChild.menuName}}
+    </span>
+  </li>
+</ng-container>

@@ -1,0 +1,37 @@
+<!--component html goes here -->
+<nz-table #rowSelectionTable [nzData]="dataSet" [nzFrontPagination]="false" nzShowQuickJumper nzShowSizeChanger [nzPageSizeOptions]="pageSize" [(nzPageSize)]="_params.pageSize" [(nzPageIndex)]="_params.pageIndex" (nzPageIndexChange)="PageIndexChange($event)"
+    (nzPageSizeChange)="PageSizeChange($event)" (nzCurrentPageDataChange)="currentPageDataChange($event)" [nzScroll]="nzScroll" nzSize="small" [nzShowTotal]="totalTemplate">
+    <thead>
+        <tr>
+            <th nzLeft="0px" nzWidth="50px" *ngIf="isCheckBox" nzShowCheckbox [(nzChecked)]="allChecked" [nzIndeterminate]="indeterminate" (nzCheckedChange)="checkAll($event)"></th>
+            <th nzWidth="50px">序号</th>
+            <th *ngFor="let th of tableThName" nzWidth="{{th.width}}px">{{th.name}}</th>
+            <th *ngIf="root.length>0" nzWidth="{{root.length*100}}px" nzRight="0px">操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of rowSelectionTable.data;let i=index">
+            <td nzLeft="0px" nzShowCheckbox *ngIf="isCheckBox" [(nzChecked)]="data.checked" [nzDisabled]="data.disabled"  (nzCheckedChange)="CheckedChange($event)"></td>
+            <td>{{(_params.pageIndex-1)*_params.pageSize+i+1}}</td>
+            <td *ngFor="let tr of tableThName">
+                <div *ngIf="tr.isInput==null">
+                    {{data[tr.field]}}
+                </div>
+                <div *ngIf="tr.isInput==1">
+                    <input *ngIf="data.disabled" type="text" nz-input [(ngModel)]="data[tr.field]" (blur)="sendInputData()" disabled>
+                    <input *ngIf="!data.disabled" type="text" nz-input [(ngModel)]="data[tr.field]" (blur)="sendInputData()">
+                </div>
+                <div *ngIf="tr.isInput==2">
+                    <nz-input-number *ngIf="(tr.isMax!=true)&&!data.disabled" [(ngModel)]="data[tr.field]" [nzMin]="1" [nzStep]="1" [nzPrecision]="0" (ngModelChange)="sendInputData()"></nz-input-number>
+                    <nz-input-number *ngIf="(tr.isMax==true)&&!data.disabled" [(ngModel)]="data[tr.field1]" [nzMin]="1" [nzMax]="data[tr.field]" [nzStep]="1" [nzPrecision]="0" (ngModelChange)="sendInputData(i)"></nz-input-number>
+                    <nz-input-number *ngIf="(tr.isMax!=true)&&data.disabled" [(ngModel)]="data[tr.field]" [nzMin]="1" [nzStep]="1" [nzPrecision]="0" (ngModelChange)="sendInputData()" disabled></nz-input-number>
+                    <nz-input-number *ngIf="(tr.isMax==true)&&data.disabled" [(ngModel)]="data[tr.field1]" [nzMin]="1" [nzMax]="data[tr.field]" [nzStep]="1" [nzPrecision]="0" (ngModelChange)="sendInputData(i)" disabled></nz-input-number>
+                </div>
+            </td>
+            <td nzRight="0px" class="table_btn" *ngIf="root.length>0">
+            </td>
+        </tr>
+    </tbody>
+</nz-table>
+<ng-template #totalTemplate let-total>总数 {{total}} 条</ng-template>
+

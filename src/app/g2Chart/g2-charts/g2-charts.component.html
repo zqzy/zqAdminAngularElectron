@@ -1,0 +1,9 @@
+<!--component html goes here -->
+<!-- 定义组件画图组件 -->
+<v-chart [forceFit]="forceFit"[width]="width" [height]="height" [data]="data" [scale]="scale">
+    <v-tooltip></v-tooltip>
+    <v-axis></v-axis>
+    <v-legend></v-legend>
+    <v-line position="month*temperature" color="city"></v-line>
+    <v-point position="month*temperature" color="city" [size]="4" [style]="style" shape="circle"></v-point>
+</v-chart>

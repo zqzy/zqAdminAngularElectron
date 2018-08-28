@@ -1,0 +1,13 @@
+<div class="code-box">
+  <nz-tree #nzTree [(ngModel)]="nodes" [nzCheckable]="true" (nzClick)="mouseAction('click', $event)" (nzDblClick)="mouseAction('dblclick',$event)">
+    <ng-template #nzTreeTemplate let-node>
+      <span class="custom-node" [class.active]="node.isSelected">
+        <span> 
+         {{node.title}}
+        </span>
+        <input *ngIf="node.isLeaf"  nz-input class="input01" [(ngModel)]="node.origin.key"  placeholder="测试">
+      </span>
+    </ng-template>
+  </nz-tree>
+</div>
+<button (click)="test()" nz-button>测试</button>

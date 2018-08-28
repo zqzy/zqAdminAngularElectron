@@ -1,0 +1,35 @@
+// component css goes here
+.loginForm {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -160px 0 0 -160px;
+    width: 320px;
+    height: 320px;
+    padding: 36px;
+    -webkit-box-shadow: 0 0 100px rgba(0, 0, 0, .08);
+    box-shadow: 0 0 100px rgba(0, 0, 0, .08);
+    .logo {
+        text-align: center;
+        display: -ms-flexbox;
+        display: flex;
+        cursor: pointer;
+        margin-bottom: 24px;
+        -ms-flex-pack: center;
+        justify-content: center;
+        -ms-flex-align: center;
+        align-items: center;
+        img {
+            width: 40px;
+            margin-right: 8px;
+        }
+        span {
+            vertical-align: text-bottom;
+            font-size: 16px;
+            text-transform: uppercase;
+            display: inline-block;
+            font: 16px "微软雅黑", "黑体";
+            color: #1890ff;
+        }
+    }
+}
